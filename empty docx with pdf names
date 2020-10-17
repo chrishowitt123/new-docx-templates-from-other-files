@@ -1,0 +1,28 @@
+import glob
+from pathlib import Path
+import os, sys
+from docx import *
+
+folder = r'C:\Users\chris\Documents\Transgola\Clients\PROJECTS\2020\375091020_TM_JTI\Orignals'
+
+orignalExt = '\*.pdf'
+
+orignalFiles = folder + orignalExt
+
+sourceFiles = []
+
+for filepath in glob.iglob(orignalFiles):
+    sourceFiles.append(filepath)
+
+    
+newFileNames = []
+
+for f in sourceFiles:
+    base = os.path.basename(f)
+    os.path.splitext(base)
+    newFileName = os.path.splitext(base)[0]
+    newFileNames.append(newFileName)
+
+for fn in newFileNames:
+    document = Document()
+    document.save(folder + '\\' + fn + '.docx')
